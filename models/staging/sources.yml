@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: ecommerce_raw
+    database: dev
+    schema: public
+    tables:
+      - name: olist_order_items_dataset
+        description: "Dados brutos de itens de pedidos do e-commerce (TP2)"
