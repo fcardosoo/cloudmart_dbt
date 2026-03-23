@@ -1,5 +1,6 @@
 select distinct
 
-    id_produto
+    id_vendedor
 
-from {{ ref('stg_vendas') }}
+from {{ ref('int_vendas_enriquecidas') }}
+where id_vendedor is not null
