@@ -1,22 +1,23 @@
 with source as (
 
     select *
-    from {{ source('ecommerce_raw','olist_order_items_dataset') }}
+    from {{ source('bronze','vendas') }}
 
 ),
 
 renamed as (
 
     select
-
-        order_id as id_pedido,
-        order_item_id as item_pedido,
-        product_id as id_produto,
-        seller_id as id_vendedor,
-        shipping_limit_date as data_limite_envio,
-        price as preco_produto,
-        freight_value as valor_frete
-
+        cast(order_id as varchar) as id_pedido,
+        cast(order_item_id as integer) as item_pedido,
+        cast(product_id as varchar) as id_produto,
+        cast(seller_id as varchar) as id_vendedor,
+        cast(shipping_limit_date as timestamp) as data_limite_envio,
+        cast(price as numeric(10,2)) as preco_produto,
+        cast(freight_value as numeric(10,2)) as valor_frete,
+        cast(ano as integer) as ano,
+        cast(mes as integer) as mes,
+        cast(dia as integer) as dia
     from source
 
 )
