@@ -12,10 +12,10 @@ with source as (
 renamed as (
 
     select
-        cast(order_id as varchar) as id_pedido,
+        {{ clean_string('order_id') }} as id_pedido,
         cast(order_item_id as integer) as item_pedido,
-        cast(product_id as varchar) as id_produto,
-        cast(seller_id as varchar) as id_vendedor,
+        {{ clean_string('product_id') }} as id_produto,
+        {{ clean_string('seller_id') }} as id_vendedor,
         cast(shipping_limit_date as timestamp) as data_limite_envio,
         cast(price as numeric(10,2)) as preco_produto,
         cast(freight_value as numeric(10,2)) as valor_frete,

@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: fato_vendas
+    description: "Tabela fato com os itens de pedido e métricas de venda."
+    columns:
+      - name: id_pedido
+        description: "Identificador do pedido."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_pedido')
+              field: id_pedido
+
+      - name: id_produto
+        description: "Identificador do produto."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_produto')
+              field: id_produto
+
+      - name: id_vendedor
+        description: "Identificador do vendedor."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_vendedor')
+              field: id_vendedor
+
+      - name: valor_total_venda
+        description: "Valor total da venda, soma do preço do produto com o frete."
+        tests:
+          - not_null
+
+  - name: dim_produto
+    description: "Dimensão de produto."
+    columns:
+      - name: id_produto
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_vendedor
+    description: "Dimensão de vendedor."
+    columns:
+      - name: id_vendedor
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_pedido
+    description: "Dimensão de pedido."
+    columns:
+      - name: id_pedido
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_tempo
+    description: "Dimensão de tempo."
+    columns:
+      - name: data
+        tests:
+          - unique
+          - not_null
